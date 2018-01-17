@@ -27,7 +27,7 @@ var truckers = [{
 var deliveries = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'shipper': 'bio-gourmet',
-  'truckerId': 'f944a3ff-591b-4d5b-9b67-c7e08cba9791',
+  'truckerId': 'f9@a3ff-591b-4d5b-9b67-c7e08cba9791',
   'distance': 100,
   'volume': 4,
   'options': {
@@ -144,6 +144,117 @@ const actors = [{
   }]
 }];
 
+
+//Exercice1
+
+for (var i = 0; i< deliveries.length; i++)
+    for (var j= 0; j < 3; j++) {
+         if(truckers[j]['id']==deliveries[i]['truckerId']){
+                deliveries[i]['price']=truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume']
+        }
+    }
+    
+
+//Exercice2
+
+for (var i = 0; i< deliveries.length; i++)
+    for (var j= 0; j < 3; j++) {
+         if(truckers[j]['id']==deliveries[i]['truckerId']){
+            if(deliveries[i]['volume']> 5){
+                deliveries[i]['price']=(truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.9
+            }
+            if(deliveries[i]['volume']> 10){
+                deliveries[i]['price']=(truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.7
+            }
+            if(deliveries[i]['volume']> 25){
+                deliveries[i]['price']=(truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.5
+            }
+            else{
+                deliveries[i]['price']=(truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])
+            }
+        }
+    }
+
+
+//Exercice3
+for (var i = 0; i< deliveries.length; i++)
+    for (var j= 0; j < 3; j++) {
+         if(truckers[j]['id']==deliveries[i]['truckerId']){
+            if(deliveries[i]['volume']> 5){
+                deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.9)*0.15
+                deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']
+            }
+            if(deliveries[i]['volume']> 10){
+                deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.7)*0.15
+                deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']
+            }
+            if(deliveries[i]['volume']> 25){
+                deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.5)*0.15
+                deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']
+            }
+            else{
+                deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume']))*0.15
+                deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']
+            }
+        }
+    }
+
+//Exercice4
+for (var i = 0; i< deliveries.length; i++){
+    for (var j= 0; j < 3; j++) {
+        if(deliveries[i]['options']['deductibleReduction']==true){
+            if(truckers[j]['id']==deliveries[i]['truckerId']){
+                var charge = Math.trunc(deliveries[i]['volume'])
+                if(deliveries[i]['volume']> 5){
+                    
+                    deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.9)*0.15
+                    deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                    deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']+charge
+            }
+             if(deliveries[i]['volume']> 10){
+                    deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.7)*0.15
+                     deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                     deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']+charge
+            }
+              if(deliveries[i]['volume']> 25){
+                    deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume'])*0.5)*0.15
+                    deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                    deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']+charge
+            }
+            else{
+                deliveries[i]['commission']['insurance']=((truckers[j]['pricePerKm']*deliveries[i]['distance']+truckers[j]['pricePerVolume']*deliveries[i]['volume']))*0.15
+                deliveries[i]['commission']['treasury']=Math.trunc(deliveries[i]['distance']/500)*1
+                deliveries[i]['commission']['convargo']=deliveries[i]['commission']['insurance']- deliveries[i]['commission']['treasury']+charge
+            }
+        }
+    }
+    }
+
+//Exercice5
+for (var i = 0; i< actors.length; i++){
+    for (var j = 0; j< deliveries.length; j++){
+            if(actors['deliveryId']==deliveries['id']){
+                  if(deliveries[i]['options']['deductibleReduction']==true){  
+                             actors[i]['deliveryId'][0]=deliveries[i]['price']+1000
+                  }
+                  else{
+                    actors[i]['deliveryId'][0]=deliveries[i]['price']+200
+                 }
+                   actors[i]['deliveryId'][1]=deliveries[i]['price']-deliveries[j]['commission']['insurance']-deliveries[j]['commission']['treasury']-deliveries[i]['commission']['convargo']
+                   actors[i]['deliveryId'][2]=deliveries[j]['commission']['insurance']
+                   actors[i]['deliveryId'][3]=deliveries[j]['commission']['treasury']
+                   actors[i]['deliveryId'][4]=deliveries[i]['commission']['convargo']
+            }
+    }
+}
+
+
 console.log(truckers);
 console.log(deliveries);
 console.log(actors);
+
+
